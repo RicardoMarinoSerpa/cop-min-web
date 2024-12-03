@@ -803,7 +803,7 @@ if st.button("Classify Event"):
                     mine_name=mine,
                     nlp_input=additional_comment
                 )
-                api_url = 'https://coppermining-288823311772.europe-west1.run.app/predict'
+                api_url = 'https://coppermining-image-288823311772.europe-west1.run.app/predict'
                 response = requests.get(api_url, params=params)
                 st.write(response.url)
 
