@@ -748,7 +748,7 @@ if st.button("Classify Event"):
     # Usar un spinner para simular una transición
     with st.spinner("Classifying the event, please wait..."):
         import time
-        time.sleep(2)  # Simular un pequeño retraso para la transición (puedes ajustar el tiempo)
+        time.sleep(0.01)  # Simular un pequeño retraso para la transición (puedes ajustar el tiempo)
 
         # Validaciones de entrada
         if duration is None:
@@ -777,7 +777,8 @@ if st.button("Classify Event"):
                 st.markdown(f"<div class='output'><b>Explanation of the class event:</b> {explanation}</div>", unsafe_allow_html=True)
 
                 # Determinar la URL de la imagen correspondiente
-                image_url = image_paths.get(prediction['prediction'], {}).get(equipment_class)
+                main_class = prediction['prediction'].split('-')[0]
+                image_url = image_paths.get(main_class, {}).get(equipment_class)
                 if image_url:
                     st.image(image_url, caption=f"Visual representation of {prediction['prediction']} - {equipment_class}")
                 else:
