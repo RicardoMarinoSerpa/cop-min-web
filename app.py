@@ -109,8 +109,45 @@ allowed_words = [
     "runoff", "backfill", "cementation", "borehole", "orebody", "dewatering", "grouting",
     "hydrology", "muck", "mine shaft", "pillar", "stope", "decline", "adit", "portal",
     "shaft collar", "ore chute", "skip", "headframe", "hoist", "slurry pump", "deposition",
-    "screen mesh", "bucket", "loader", "stockyard", "grading", "scale", "overcut"
+    "screen mesh", "bucket", "loader", "stockyard", "grading", "scale", "overcut",
+    "minería", "camión", "excavadora", "pala", "perforación", "acarreo", "equipo", "mineral",
+    "seguridad", "inspección", "tiempo de inactividad", "mantenimiento", "carga", "descarga", "turno",
+    "operación", "motoniveladora", "bulldozer", "camión cisterna", "explosivos", "material",
+    "transporte", "proceso", "voladura", "auxiliar", "piscina", "tajo", "trituradora", "cinta transportadora",
+    "triturador", "molino", "refinería", "fundición", "levantamiento topográfico", "geología", "roca", "banco",
+    "vertedero", "excavación", "camino de acarreo", "almacén de mineral", "reclamación", "monitoreo",
+    "pulpa", "relaves", "cribado", "plataforma de perforación", "hormigón proyectado", "voladuras", "detonación",
+    "mineral", "muestra de núcleo", "ventilación", "subterráneo", "sobrecarga", "motoniveladora",
+    "tractor de orugas", "alimentador", "paso de mineral", "tolva", "eje", "subida", "pozo",
+    "alimentación de trituradora", "ley del mineral", "plan minero", "ley de corte", "mina a cielo abierto", "socavón", "horizonte",
+    "gestión del agua", "lixiviación", "montón", "recuperación", "procesamiento", "rendimiento", "relaves de molino",
+    "relación de desbroce", "escombrera", "altura de banco", "registro de núcleos", "geofísica", "muestreo",
+    "escorrentía", "relleno", "cementación", "sondaje", "cuerpo mineralizado", "desagüe", "inyección",
+    "hidrología", "escombros", "pozo minero", "pilar", "corte y relleno", "declive", "socavón", "portal",
+    "collar del pozo", "chute de mineral", "jaula", "torre de extracción", "malacate", "bomba de lodos", "depósito",
+    "malla de criba", "cuchara", "cargadora", "almacén", "clasificación", "báscula", "sobrecorte",
+    "procesamiento hidrometalúrgico", "mineral oxidado", "extracción electrolítica", "plan de cierre de mina", "residuos",
+    'Reserva No Progamada', 'Demora', 'Reserva Programda', 'Operacional Programado',
+    'Operacional No Programado', 'Mantenimiento No Programado', 'Mantenimiento Programado', 'Perdida Operacional',
+    'Fuerza Mayor', 'Corte energia operacional', 'ABASTECIMIENTO COMBUSTIBLE', 'CAMBIO DE TURNO',
+    'Cambio de modulo', 'Traslado equipo a mantenimien', 'Relevo', 'Reunion', 'AHT DOWN TIME',
+    'AHT EXCEPTION', 'AHT HAS WRONG ASSIGNMENT', 'Sin Operador', 'Otras demoras', 'Sobrecarga o mal estibado',
+    'Neumaticos correctivo', 'Reparacion imprevista correct', 'Mantenimiento preventivo prog', "AHT'S BLOCKED BY AHT ERROR",
+    "AHT'S ROAD CLOSED", "AHT'S STOPPED", 'AHT IS WAITING FOR DUMP', 'AHT LOADER IS BUSY', 'Falta equipo de carguio',
+    'NO PATH TO AREA FOR AHT', 'Limpieza de cancha', 'Obstruccion de vias', 'AHT BLOCKED BY A STOPPED AHT', 'TRONADURA',
+    "AHT'S INTERSECTION CLOSED", 'Atollo', 'Espera Combustible', 'Reparacion programada', 'Chequeo preoperacional',
+    'PREVENTIVO CAEX', 'Translado de equipo', 'CORRECTIVO CAEX', 'CORRECTIVO CENTRAL', 'Chancador no disponible',
+    'Stock lleno', 'Neumaticos programados', 'Espera mecanico correctivo', 'CORRECTIVO RED', 'PREVENTIVO CENTRAL',
+    'UPGRADE', 'Excluido Operacional', "AHT'S DUMPING AREA CLOSED", 'Desviacion Programada program',
+    'AHT APPLICATION CLOSED', 'Abastecimiento de agua', 'Evento operacional correctivo', 'Colacion', 'Espera traslado  ',
+    "AHT'S LOADING AREA CLOSED", 'Espera energia ', 'ACTUALIZACIÓN BD', "AHT'S LOCATION CLOSED", 'Excluido Programado',
+    'Espera de agua', 'LOADER IS IDLE', 'Falta de material', 'MOVIMIENTO DE CABLE', 'Evento operacional programado',
+    'Botadero no disponible', 'FALTA CAEX', 'PREVENTIVO TRIPULADO', 'CORRECTIVO TRIPULADO'
 ]
+
+allowed_words = [word.lower() for phrase in allowed_words for word in phrase.split()]
+allowed_words = list(dict.fromkeys(allowed_words))
+
 
 radomiro_relationships = {
     "CAEX": [
