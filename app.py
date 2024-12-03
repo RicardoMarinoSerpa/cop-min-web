@@ -2,7 +2,6 @@ import streamlit as st
 from datetime import datetime, date
 import requests
 
-
 # Configuración de la página
 st.set_page_config(
     page_title="Mining Event Classification",
@@ -32,6 +31,17 @@ st.markdown(
         color: #bdbdbd;
         margin-bottom: 20px;
     }
+    .section-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-top: 20px; /* Espacio superior entre secciones */
+        margin-bottom: 5px; /* Espacio entre el título y la descripción */
+    }
+    .section-description {
+        font-size: 12px;
+        margin-top: 0; /* Sin espacio superior */
+        margin-bottom: -40px; /* Espacio entre la descripción y el selectbox */
+    }
     .section-header {
         font-size: 24px;
         color: #76ff03;
@@ -60,18 +70,48 @@ st.markdown(
         font-size: 16px;
     }
     .custom-warning {
-        background-color: #F8F9FA; /* Color de fondo (gris claro) */
-        color: #6C757D; /* Color del texto (gris oscuro) */
+        background-color: #f8f9fa; /* Color de fondo (gris claro) */
+        color: #6c757d; /* Color del texto (gris oscuro) */
         padding: 10px;
-        border: 1px solid #D6D8DB; /* Borde gris */
+        border: 1px solid #d6d8db; /* Borde gris */
         border-radius: 4px;
         font-size: 16px;
         margin-bottom: 10px;
+    }
+    .stSelectbox > div {
+        margin-top: 0 !important; /* Alineación con las descripciones */
     }
     </style>
     """,
     unsafe_allow_html=True
 )
+
+
+
+mine_images = {
+    "Radomiro Tomic": "./Generated_Images/Radomiro-Tomic-.jpeg",
+    "Gabriela Mistral": "./Generated_Images/1732572186JfmiH5e9.jpg",
+}
+
+allowed_words = [
+    "mining", "truck", "excavator", "shovel", "drilling", "haul", "equipment", "ore",
+    "safety", "inspection", "downtime", "maintenance", "load", "unload", "shift",
+    "operation", "grader", "bulldozer", "water truck", "explosives", "material",
+    "transport", "process", "blast", "auxiliary", "pool", "pit", "crusher", "conveyor",
+    "grinder", "mill", "refinery", "smelting", "survey", "geology", "rock", "bench",
+    "dump", "excavation", "haul road", "stockpile", "reclamation", "monitoring",
+    "slurry", "tailings", "screening", "drill rig", "shotcrete", "blasting", "detonation",
+    "mineral", "core sample", "ventilation", "underground", "overburden", "grader",
+    "dozer", "feeder", "ore pass", "bin", "shaft", "raise", "winze", "crusher feed",
+    "ore grade", "mine plan", "cutoff grade", "open pit", "undercut", "horizon",
+    "water management", "leach", "heap", "recovery", "processing", "yield", "mill tailings",
+    "strip ratio", "mine dump", "bench height", "core logging", "geophysics", "sampling",
+    "runoff", "backfill", "cementation", "borehole", "orebody", "dewatering", "grouting",
+    "hydrology", "muck", "mine shaft", "pillar", "stope", "decline", "adit", "portal",
+    "shaft collar", "ore chute", "skip", "headframe", "hoist", "slurry pump", "deposition",
+    "screen mesh", "bucket", "loader", "stockyard", "grading", "scale", "overcut"
+]
+
 radomiro_relationships = {
     "CAEX": [
         ("C-01", "CAT 789-D"),
@@ -399,6 +439,7 @@ equipment_data = {
                     'C922', 'C923', 'C924', 'C925', 'C926', 'C927', 'C928', 'C929', 'C930', 'C931',
                     'C932', 'C933', 'C934', 'C935', 'RT2', 'RT3', 'RT4', 'RT5']
 
+
         },
         "CARGUIO": {
             "types": ['CAT 994-F', 'CAT 992-G', 'CAT 992-K', 'PH4100XPA', 'PH4100XPB', 'O&K RH-200',
@@ -469,46 +510,166 @@ equipment_data = {
         }
     }
 }
-
+#Descripciones de las clases de vehiculos
+equipment_descriptions = {
+    "CAEX": "Large mining haul trucks used for transporting overburden and ore. These vehicles are critical for moving materials efficiently in mining operations.",
+    "CARGUIO": "Loading equipment such as excavators and shovels designed to load materials onto haul trucks or other transport systems.",
+    "EEAA": "Auxiliary equipment used in mining operations, such as water trucks, bulldozers, and graders. These support vehicles help maintain operational efficiency and safety.",
+    "PERFOS": "Drilling equipment used to create blast holes for explosives or for exploratory drilling to identify ore deposits."
+}
+#Descripciones de las clases de eventos
+class_descriptions = {
+    "DO": "Operational downtimes caused by planned activities such as shift changes, training, safety inspections, or other routine procedures. These are scheduled events aimed at maintaining operational standards.",
+    "DONP": "Unexpected operational downtimes due to unforeseen events, such as sudden lack of operator availability, equipment misplacement, or situational delays. These require quick intervention to resume operations.",
+    "MP": "Scheduled maintenance activities designed to prevent future equipment failures. This includes tasks such as part replacements, inspections, and other proactive measures to ensure reliability.",
+    "MC": "Corrective maintenance triggered by unexpected equipment failures. These include breakdowns due to mechanical, electrical, or structural issues that need immediate attention to restore functionality.",
+    "DCE": "Downtime caused by external factors beyond operational control. These include weather conditions, social environment disruptions, or other client-independent events affecting the mining process.",
+    "DAAR": "Upstream delays or waiting times caused by equipment or processes ahead in the production chain. These impact the smooth flow of operations for the current process or equipment.",
+    "DAAB": "Downstream delays or waiting times caused by processes further along the production chain. These occur when subsequent stages of production are not ready or synchronized with the current operations."
+}
+#Ubicacion para cada imagen TEMPORAL
+image_paths = {
+    "DO": {
+        "PERFOS": "./Generated_Images/DO_PERFOS.png",
+        "CAEX": "./Generated_Images/DO_CAEX.png",
+        "CARGUIO": "./Generated_Images/DO_CARGUIO.png",
+        "EEAA": "./Generated_Images/DO_EEAA.png",
+    },
+    "DONP": {
+        "PERFOS": "./Generated_Images/DONP_PERFOS.png",
+        "CAEX": "./Generated_Images/DONP_CAEX.png",
+        "CARGUIO": "./Generated_Images/DONP_CARGUIO.png",
+        "EEAA": "./Generated_Images/DONP_EEAA.png",
+    },
+    "MP": {
+        "PERFOS": "./Generated_Images/MP_PERFOS.png",
+        "CAEX": "./Generated_Images/MP_CAEX.png",
+        "CARGUIO": "./Generated_Images/MP_CARGUIO.png",
+        "EEAA": "./Generated_Images/MP_EEAA.png",
+    },
+    "MC": {
+        "PERFOS": "./Generated_Images/MC_PERFOS.png",
+        "CAEX": "./Generated_Images/MC_CAEX.png",
+        "CARGUIO": "./Generated_Images/MC_CARGUIO.png",
+        "EEAA": "./Generated_Images/MC_EEAA.png",
+    },
+    "DCE": {
+        "PERFOS": "./Generated_Images/DCE_PERFOS.png",
+        "CAEX": "./Generated_Images/DCE_CAEX.png",
+        "CARGUIO": "./Generated_Images/DCE_CARGUIO.png",
+        "EEAA": "./Generated_Images/DCE_EEAA.png",
+    },
+    "DAAR": {
+        "PERFOS": "./Generated_Images/DAAR_PERFOS.png",
+        "CAEX": "./Generated_Images/DAAR_CAEX.png",
+        "CARGUIO": "./Generated_Images/DAAR_CARGUIO.png",
+        "EEAA": "./Generated_Images/DAAR_EEAA.png",
+    },
+    "DAAB": {
+        "PERFOS": "./Generated_Images/DAAB_PERFOS.png",
+        "CAEX": "./Generated_Images/DAAB_CAEX.png",
+        "CARGUIO": "./Generated_Images/DAAB_CARGUIO.png",
+        "EEAA": "./Generated_Images/DAAB_EEAA.png",
+    },
+}
 # Título principal
 st.markdown("<div class='title'>⛏️ Mining Event Classification</div>", unsafe_allow_html=True)
 st.markdown("<div class='description'>Find which class type is your event.</div>", unsafe_allow_html=True)
 
-st.image("https://images.unsplash.com/photo-1523848309072-c199db53f137?q=80&w=1770&auto=format&fit=crop")
+st.markdown('<div class="section-title">Select Mine</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="section-description">Select the mining site where the operation is being conducted, such as Radomiro Tomic or Gabriela Mistral.</div>',
+    unsafe_allow_html=True
+)
 
 # Selección de mina
-mine = st.selectbox("Select Mine", options=list(equipment_data.keys()))
+mine = st.selectbox(
+    "",
+    options=list(equipment_data.keys()),
+    key="mine_select"
+)
 
-# Selección de Equipment Class
-equipment_class = st.selectbox("Select Equipment Class", options=[""] + list(equipment_data[mine].keys()))
+# Mostrar imagen asociada a la mina seleccionada
+if mine in mine_images:
+    st.image(
+        mine_images[mine],
+        use_container_width=True,
+        caption=f"Mining operation at {mine}"
+    )
+else:
+    st.warning("No image available for the selected mine.")
+# Título y descripción de Equipment Class
+st.markdown('<div class="section-title">Equipment Class</div>', unsafe_allow_html=True)
+st.markdown(
+    '<div class="section-description">Choose the broad category of equipment involved in the mining operation, such as trucks (CAEX), loaders (CARGUIO), or drilling rigs (PERFOS).</div>',
+    unsafe_allow_html=True
+)
 
-# Mostrar opciones dinámicas basadas en Equipment Class
+equipment_class = st.selectbox(
+    "",
+    options=[""] + list(equipment_data[mine].keys()),
+    key="equipment_class_select"
+)
+
+# Opciones dinámicas basadas en Equipment Class
 if equipment_class:
     if mine == "Gabriela Mistral":
-        # Mensaje para Gabriela Mistral
-        st.markdown('<div class="custom-warning">Equipment Type is not applicable for Gabriela Mistral.</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="custom-warning">Equipment Type is not applicable for Gabriela Mistral.</div>',
+            unsafe_allow_html=True
+        )
         equipment_type = None
-        equipment_id = st.selectbox("Select Equipment ID", options=[""] + equipment_data[mine][equipment_class].get("ids", []))
+        equipment_id = st.selectbox(
+            "Choose Equipment ID",
+            options=[""] + equipment_data[mine][equipment_class].get("ids", []),
+            key="equipment_id_select"
+        )
     else:
         # Obtener tipos e IDs para otras minas
         types = equipment_data[mine][equipment_class].get("types", [])
         ids = equipment_data[mine][equipment_class].get("ids", [])
 
-        # Selector de Equipment Type
-        equipment_type = st.selectbox("Select Equipment Type", options=[""] + types)
+        # Título y descripción de Equipment Type
+        st.markdown('<div class="section-title">Equipment Type</div>', unsafe_allow_html=True)
+        st.markdown(
+            '<div class="section-description">Select the specific type or model of equipment within the chosen class, like "CAT 789-D" or "DRILLTECH D75KS".</div>',
+            unsafe_allow_html=True
+        )
+        equipment_type = st.selectbox(
+            "",
+            options=[""] + types,
+            key="equipment_type_select"
+        )
 
-        # Filtrar IDs relacionados al tipo seleccionado (si se selecciona un tipo)
+        # Filtrar IDs relacionados al tipo seleccionado
         if equipment_type:
             related_ids = [
                 equipment_id for equipment_id in ids
                 if (equipment_id, equipment_type) in radomiro_relationships.get(equipment_class, [])
             ]
-            equipment_id = st.selectbox("Select Equipment ID", options=[""] + related_ids)
+            st.markdown('<div class="section-title">Equipment ID</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div class="section-description">Choose the unique identifier for the selected equipment type, representing a specific unit in the operation.</div>',
+                unsafe_allow_html=True
+            )
+            equipment_id = st.selectbox(
+                "",
+                options=[""] + related_ids,
+                key="related_ids_select"
+            )
             if not related_ids:
                 st.warning(f"No IDs available for the selected type '{equipment_type}'.")
         else:
-            equipment_id = st.selectbox("Select Equipment ID", options=[""] + ids)
-
+            st.markdown('<div class="section-title">Equipment ID</div>', unsafe_allow_html=True)
+            st.markdown(
+                '<div class="section-description">Choose the unique identifier for the selected equipment type, representing a specific unit in the operation.</div>',
+                unsafe_allow_html=True
+            )
+            equipment_id = st.selectbox(
+                "",
+                options=[""] + ids,
+                key="equipment_id_default_select"
+            )
 
 # --- Sección: Event Duration ---
 st.markdown("<div class='section-header'>Event Duration</div>", unsafe_allow_html=True)
@@ -523,7 +684,7 @@ with col1:
 with col2:
     st.markdown('<div class="time-input-container">', unsafe_allow_html=True)
     end_date = st.date_input("End Date", value=date.today())
-    end_time_input = st.text_input("End Time (HH:MM)", value="09:00", key="end_time")
+    end_time_input = st.text_input("End Time (HH:MM)", value="9:00", key="end_time")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Validación de formato de hora
@@ -543,36 +704,92 @@ except ValueError:
     st.error("Please enter valid time in HH:MM format.")
     duration = None
 
+
 # --- Sección: Additional Information ---
 st.markdown("<div class='section-header'>Additional Information</div>", unsafe_allow_html=True)
 
-# Comentario adicional
-additional_comment = st.text_area("Write a comment:", placeholder="Enter your comment here.")
+# Función para validar comentarios
+def validate_comment(comment, allowed_words):
+    words = comment.lower().split()
+    valid_words = [word for word in words if word in allowed_words]
+    return len(valid_words) > 0
 
-# --- Sección: Output ---
+# Campo de texto con validación en tiempo real
+st.markdown("<h3 style='text-align: center;'>Write a comment</h3>", unsafe_allow_html=True)
+additional_comment = st.text_area(
+    "",
+    placeholder="Enter mining-related terms...",
+    key="comment"
+)
+
+# Validación en tiempo real
+if "comment" in st.session_state:
+    comment_text = st.session_state.comment.strip()
+    if comment_text:
+        if validate_comment(comment_text, allowed_words):
+            st.markdown(
+                "<p style='text-align: center; color: green; font-weight: bold;'>✔ Comment is valid.</p>",
+                unsafe_allow_html=True
+            )
+        else:
+            st.markdown(
+                "<p style='text-align: center; color: red; font-weight: bold;'>✖ Invalid comment. Use mining-related terms.</p>",
+                unsafe_allow_html=True
+            )
+    else:
+        st.markdown(
+            "<p style='text-align: center; color: orange; font-weight: bold;'>⚠ Please enter a comment.</p>",
+            unsafe_allow_html=True
+        )
+
 st.markdown("<div class='section-header'>Output</div>", unsafe_allow_html=True)
 
 if st.button("Classify Event"):
-    if duration is None:
-        st.error("Invalid event times. Please fix the inputs.")
-    else:
-        try:
-            params = dict(
-                start_time=start_time.strftime("%H:%M:%S"),
-                end_time=end_time.strftime("%H:%M:%S"),
-                equipment_class=equipment_class,
-                equipment=equipment_id,
-                equipment_type=equipment_type,
-                mine_name=mine,
-                nlp_input=additional_comment
-            )
-            api_url = 'https://coppermining-image-288823311772.europe-west1.run.app/predict'
-            response = requests.get(api_url, params=params)
+    # Usar un spinner para simular una transición
+    with st.spinner("Classifying the event, please wait..."):
+        import time
+        time.sleep(2)  # Simular un pequeño retraso para la transición (puedes ajustar el tiempo)
 
-            prediction = response.json()
+        # Validaciones de entrada
+        if duration is None:
+            st.error("Invalid event times. Please fix the inputs.")
+        elif not equipment_class:
+            st.error("Please select an Equipment Class.")
+        else:
+            try:
+                params = dict(
+                    start_time=start_time.strftime("%H:%M:%S"),
+                    end_time=end_time.strftime("%H:%M:%S"),
+                    equipment_class=equipment_class,
+                    equipment=equipment_id,
+                    equipment_type=equipment_type,
+                    mine_name=mine,
+                    nlp_input=additional_comment
+                )
+                api_url = 'https://coppermining-image-288823311772.europe-west1.run.app/predict'
+                response = requests.get(api_url, params=params)
 
-            # Mostrar resultados
-            st.markdown(f"<div class='output'>Prediction: <b>{prediction['answer']}</b></div>", unsafe_allow_html=True)
+                prediction = response.json()
 
-        except Exception as e:
-            st.error(f"An error occurred while predicting: {e}")
+                # Mostrar resultados
+                st.markdown(f"<div class='output'>Prediction: <b>{prediction['answer']}</b></div>", unsafe_allow_html=True)
+                explanation = class_descriptions.get(prediction['prediction'], "No explanation available.")
+                st.markdown(f"<div class='output'><b>Explanation of the class event:</b> {explanation}</div>", unsafe_allow_html=True)
+
+                # Determinar la URL de la imagen correspondiente
+                image_url = image_paths.get(prediction['prediction'], {}).get(equipment_class)
+                if image_url:
+                    st.image(image_url, caption=f"Visual representation of {prediction['prediction']} - {equipment_class}")
+                else:
+                    st.warning(f"No image available for the combination: {prediction['prediction']} ({equipment_class}).")
+
+            except Exception as e:
+                st.error(f"An error occurred while predicting: {e}")
+
+
+#Prompt: An ultra-realistic photograph of a mining operation at {mine_name}, capturing a critical moment where a {vehicle_type} is expirencing a {problem_description}. Shot with photographic realism from eye-level POV, the scene conveys true scale and professional mining operations. The {vehicle_type} is prominently featured with clear visibility of affected components, showing authentic surface textures, accumulated dust, and operational wear patterns that reflect its daily use.
+#A primary technician wearing full mining safety gear including high-visibility yellow vest, white hard hat with site logo, and steel-toed boots, is methodically inspecting the {vehicle_type}. Their experienced stance and focused attention emphasize the professional nature of the operation. A supervisor stands fifteen feet away, holding a tablet displaying diagnostic data, actively monitoring the situation. A third worker, positioned at ground level near the vehicle, remains ready to assist with specialized tools while maintaining proper safety protocols.
+#The environment showcases a professional, active mining site with compact soil ground marked by clear tire impressions. Operational facilities and processing plants create a layered backdrop, with additional mining equipment visible in the middle distance. The maintenance area appears orderly and well-organized, reflecting standard safety practices.
+#Natural daylight illuminates the scene, creating soft shadows that add depth without harsh contrasts. A slight mining dust hangs in the air, adding atmospheric perspective, while the sky above remains clear with minimal clouds. The overall atmosphere emphasizes safety, professionalism, and operational efficiency, maintaining photorealistic quality without artistic exaggeration. Every detail, from the workers' coordinated actions to the organized environment, reflects the systematic nature of modern mining operations.
+#
+#
