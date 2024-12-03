@@ -805,6 +805,7 @@ if st.button("Classify Event"):
                 )
                 api_url = 'https://coppermining-288823311772.europe-west1.run.app/predict'
                 response = requests.get(api_url, params=params)
+                st.write(response.url)
 
                 prediction = response.json()
                 main_class = prediction['prediction'].split('-')[0]
