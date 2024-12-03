@@ -422,6 +422,27 @@ radomiro_relationships = {
 }
 # Datos dinámicos para las minas
 equipment_data = {
+    "Gabriela Mistral": {
+        "CAEX": {
+            "ids": ['CE01', 'CE02', 'CE03', 'CE04', 'CE05', 'CE06', 'CE07', 'CE10', 'CE11', 'CE12',
+                    'CE13', 'CE14', 'CE15', 'CE16', 'CE17', 'CE18', 'CE19', 'CE20']
+
+
+        },
+        "CARGUIO": {
+            "ids": ['PA_01', 'PA_02', 'PC_01', 'CF_01', 'CF_02', 'CF_DEMO']
+
+
+        },
+        "EEAA": {
+            "ids": ['CR_01', 'CR_02', 'CR_03', 'EXC01', 'MF_01', 'MF_02', 'MO_02', 'MO_03', 'MO_04',
+                    'TN_03', 'TN_04', 'TN_05', 'TO_01', 'TO_02', 'TO_03', 'TO_04', 'TO_05']
+        },
+        "PERFOS": {
+            "ids": ['PD02', 'PE01', 'PE02']
+
+        }
+    },
     "Radomiro Tomic": {
         "CAEX": {
             "types": ['CAT 789-D', 'CAT 789-C', 'Kom.930ER', 'DESCARGA', 'Kom.930E', 'Kom.930EN','Lieb-T282B', 'Lieb-T282C1', 'Kom.930E-4SE'],
@@ -485,27 +506,6 @@ equipment_data = {
             "ids": ['P-30', 'P-31', 'P-32', 'P-33', 'P-34', 'P-35', 'P-36', 'PE107', 'PE108', 'PE109',
                     'PE110', 'PE111', 'PE112', 'PE113', 'PE114', 'PE115', 'PERFO-01', 'R01', 'R02',
                     'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10']
-
-        }
-    },
-    "Gabriela Mistral": {
-        "CAEX": {
-            "ids": ['CE01', 'CE02', 'CE03', 'CE04', 'CE05', 'CE06', 'CE07', 'CE10', 'CE11', 'CE12',
-                    'CE13', 'CE14', 'CE15', 'CE16', 'CE17', 'CE18', 'CE19', 'CE20']
-
-
-        },
-        "CARGUIO": {
-            "ids": ['PA_01', 'PA_02', 'PC_01', 'CF_01', 'CF_02', 'CF_DEMO']
-
-
-        },
-        "EEAA": {
-            "ids": ['CR_01', 'CR_02', 'CR_03', 'EXC01', 'MF_01', 'MF_02', 'MO_02', 'MO_03', 'MO_04',
-                    'TN_03', 'TN_04', 'TN_05', 'TO_01', 'TO_02', 'TO_03', 'TO_04', 'TO_05']
-        },
-        "PERFOS": {
-            "ids": ['PD02', 'PE01', 'PE02']
 
         }
     }
@@ -770,14 +770,15 @@ if st.button("Classify Event"):
                 response = requests.get(api_url, params=params)
 
                 prediction = response.json()
+                main_class = prediction['prediction'].split('-')[0]
 
                 # Mostrar resultados
                 st.markdown(f"<div class='output'>Prediction: <b>{prediction['answer']}</b></div>", unsafe_allow_html=True)
-                explanation = class_descriptions.get(prediction['prediction'], "No explanation available.")
+                explanation = class_descriptions.get(main_class, "No explanation available.")
                 st.markdown(f"<div class='output'><b>Explanation of the class event:</b> {explanation}</div>", unsafe_allow_html=True)
 
                 # Determinar la URL de la imagen correspondiente
-                main_class = prediction['prediction'].split('-')[0]
+
                 image_url = image_paths.get(main_class, {}).get(equipment_class)
                 if image_url:
                     st.image(image_url, caption=f"Visual representation of {prediction['prediction']} - {equipment_class}")
