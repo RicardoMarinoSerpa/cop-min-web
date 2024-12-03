@@ -773,9 +773,9 @@ if st.button("Classify Event"):
                 main_class = prediction['prediction'].split('-')[0]
 
                 # Mostrar resultados
-                st.markdown(f"<div class='output'>Prediction: <b>{prediction['answer']}</b></div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='output'>Prediction: <b>{prediction['answer']}</b></div><br>", unsafe_allow_html=True)
                 explanation = class_descriptions.get(main_class, "No explanation available.")
-                st.markdown(f"<div class='output'><b>Explanation of the class event:</b> {explanation}</div>", unsafe_allow_html=True)
+                st.markdown(f"<div class='output'><b>Explanation of the class event:</b> {explanation}</div><br>", unsafe_allow_html=True)
 
                 # Determinar la URL de la imagen correspondiente
 
