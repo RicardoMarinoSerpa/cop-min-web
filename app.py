@@ -89,8 +89,8 @@ st.markdown(
 
 
 mine_images = {
-    "Radomiro Tomic": "./Generated_Images/Radomiro-Tomic-.jpeg",
-    "Gabriela Mistral": "./Generated_Images/1732572186JfmiH5e9.jpg",
+    "Radomiro Tomic": "Generated_Images/Radomiro-Tomic-.jpeg",
+    "Gabriela Mistral": "Generated_Images/1732572186JfmiH5e9.jpg",
 }
 
 allowed_words = [
@@ -530,46 +530,46 @@ class_descriptions = {
 #Ubicacion para cada imagen TEMPORAL
 image_paths = {
     "DO": {
-        "PERFOS": "./Generated_Images/DO_PERFOS.png",
-        "CAEX": "./Generated_Images/DO_CAEX.png",
-        "CARGUIO": "./Generated_Images/DO_CARGUIO.png",
-        "EEAA": "./Generated_Images/DO_EEAA.png",
+        "PERFOS": "Generated_Images/DO_PERFOS.png",
+        "CAEX": "Generated_Images/DO_CAEX.png",
+        "CARGUIO": "Generated_Images/DO_CARGUIO.png",
+        "EEAA": "Generated_Images/DO_EEAA.png",
     },
     "DONP": {
-        "PERFOS": "./Generated_Images/DONP_PERFOS.png",
-        "CAEX": "./Generated_Images/DONP_CAEX.png",
-        "CARGUIO": "./Generated_Images/DONP_CARGUIO.png",
-        "EEAA": "./Generated_Images/DONP_EEAA.png",
+        "PERFOS": "Generated_Images/DONP_PERFOS.png",
+        "CAEX": "Generated_Images/DONP_CAEX.png",
+        "CARGUIO": "Generated_Images/DONP_CARGUIO.png",
+        "EEAA": "Generated_Images/DONP_EEAA.png",
     },
     "MP": {
-        "PERFOS": "./Generated_Images/MP_PERFOS.png",
-        "CAEX": "./Generated_Images/MP_CAEX.png",
-        "CARGUIO": "./Generated_Images/MP_CARGUIO.png",
-        "EEAA": "./Generated_Images/MP_EEAA.png",
+        "PERFOS": "Generated_Images/MP_PERFOS.png",
+        "CAEX": "Generated_Images/MP_CAEX.png",
+        "CARGUIO": "Generated_Images/MP_CARGUIO.png",
+        "EEAA": "Generated_Images/MP_EEAA.png",
     },
     "MC": {
-        "PERFOS": "./Generated_Images/MC_PERFOS.png",
-        "CAEX": "./Generated_Images/MC_CAEX.png",
-        "CARGUIO": "./Generated_Images/MC_CARGUIO.png",
-        "EEAA": "./Generated_Images/MC_EEAA.png",
+        "PERFOS": "Generated_Images/MC_PERFOS.png",
+        "CAEX": "Generated_Images/MC_CAEX.png",
+        "CARGUIO": "Generated_Images/MC_CARGUIO.png",
+        "EEAA": "Generated_Images/MC_EEAA.png",
     },
     "DCE": {
-        "PERFOS": "./Generated_Images/DCE_PERFOS.png",
-        "CAEX": "./Generated_Images/DCE_CAEX.png",
-        "CARGUIO": "./Generated_Images/DCE_CARGUIO.png",
-        "EEAA": "./Generated_Images/DCE_EEAA.png",
+        "PERFOS": "Generated_Images/DCE_PERFOS.png",
+        "CAEX": "Generated_Images/DCE_CAEX.png",
+        "CARGUIO": "Generated_Images/DCE_CARGUIO.png",
+        "EEAA": "Generated_Images/DCE_EEAA.png",
     },
     "DAAR": {
-        "PERFOS": "./Generated_Images/DAAR_PERFOS.png",
-        "CAEX": "./Generated_Images/DAAR_CAEX.png",
-        "CARGUIO": "./Generated_Images/DAAR_CARGUIO.png",
-        "EEAA": "./Generated_Images/DAAR_EEAA.png",
+        "PERFOS": "Generated_Images/DAAR_PERFOS.png",
+        "CAEX": "Generated_Images/DAAR_CAEX.png",
+        "CARGUIO": "Generated_Images/DAAR_CARGUIO.png",
+        "EEAA": "Generated_Images/DAAR_EEAA.png",
     },
     "DAAB": {
-        "PERFOS": "./Generated_Images/DAAB_PERFOS.png",
-        "CAEX": "./Generated_Images/DAAB_CAEX.png",
-        "CARGUIO": "./Generated_Images/DAAB_CARGUIO.png",
-        "EEAA": "./Generated_Images/DAAB_EEAA.png",
+        "PERFOS": "Generated_Images/DAAB_PERFOS.png",
+        "CAEX": "Generated_Images/DAAB_CAEX.png",
+        "CARGUIO": "Generated_Images/DAAB_CARGUIO.png",
+        "EEAA": "Generated_Images/DAAB_EEAA.png",
     },
 }
 # Título principal
