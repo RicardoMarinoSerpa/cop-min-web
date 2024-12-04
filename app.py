@@ -767,7 +767,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.image("./Presentation_Images/TimeModel.png")
+st.image("./Presentation_Images/Model.png")
 
 
 # Línea divisoria con título
