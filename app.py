@@ -9,7 +9,6 @@ st.set_page_config(
     layout="centered"
 )
 
-# Estilos personalizados
 st.markdown(
     """
     <style>
@@ -40,7 +39,7 @@ st.markdown(
     .section-description {
         font-size: 12px;
         margin-top: 0; /* Sin espacio superior */
-        margin-bottom: -40px; /* Espacio entre la descripción y el selectbox */
+        margin-bottom: 0px; /* Espacio entre la descripción y el selectbox */
     }
     .section-header {
         font-size: 24px;
@@ -55,7 +54,6 @@ st.markdown(
         font-weight: bold;
         text-align: center;
     }
-
     .time-input-container {
         display: flex;
         flex-direction: column;
@@ -81,10 +79,35 @@ st.markdown(
     .stSelectbox > div {
         margin-top: 0 !important; /* Alineación con las descripciones */
     }
+
+    /* Nuevas clases añadidas */
+    .paragraph {
+        font-size: 16px; /* Tamaño del texto del párrafo */
+        line-height: 1.5; /* Altura de línea para mayor legibilidad */
+        margin-bottom: 20px; /* Espacio inferior entre párrafos */
+        color: #e0e0e0; /* Color del texto */
+    }
+    .sub-title {
+        font-size: 20px; /* Tamaño del subtítulo adicional */
+        font-weight: bold;
+        margin-top: 25px; /* Espacio superior */
+        margin-bottom: 10px; /* Espacio inferior */
+        color: #76ff03; /* Color del texto */
+    }
+    .highlighted-text {
+        font-size: 16px; /* Tamaño del texto resaltado */
+        color: #76ff03; /* Color del texto resaltado */
+        font-weight: bold; /* Texto en negrita */
+    }
+    .spacer {
+        margin-top: 20px; /* Espacio superior */
+        margin-bottom: 20px; /* Espacio inferior */
+    }
     </style>
     """,
     unsafe_allow_html=True
 )
+
 
 
 
@@ -556,62 +579,170 @@ equipment_descriptions = {
 }
 #Descripciones de las clases de eventos
 class_descriptions = {
-    "DO": "Operational downtimes caused by planned activities such as shift changes, training, safety inspections, or other routine procedures. These are scheduled events aimed at maintaining operational standards.",
-    "DONP": "Unexpected operational downtimes due to unforeseen events, such as sudden lack of operator availability, equipment misplacement, or situational delays. These require quick intervention to resume operations.",
-    "MP": "Scheduled maintenance activities designed to prevent future equipment failures. This includes tasks such as part replacements, inspections, and other proactive measures to ensure reliability.",
-    "MC": "Corrective maintenance triggered by unexpected equipment failures. These include breakdowns due to mechanical, electrical, or structural issues that need immediate attention to restore functionality.",
-    "DCE": "Downtime caused by external factors beyond operational control. These include weather conditions, social environment disruptions, or other client-independent events affecting the mining process.",
-    "DAAR": "Upstream delays or waiting times caused by equipment or processes ahead in the production chain. These impact the smooth flow of operations for the current process or equipment.",
-    "DAAB": "Downstream delays or waiting times caused by processes further along the production chain. These occur when subsequent stages of production are not ready or synchronized with the current operations."
+    "DONP-OPERADOR NO DISPONIBLE/ESPERA": "Unexpected downtime caused by unavailable or waiting operators, requiring reassignment or intervention.",
+    "DO-COLACION": "Planned downtime for meal breaks, ensuring operator rest and productivity.",
+    "DO-CAPACITACIONES-CHARLAS": "Scheduled training sessions or meetings aimed at improving skills and communication.",
+    "DO-CAMBIO DE TURNO": "Planned shift changes to ensure continuous operations and adequate staffing.",
+    "ODNP-ESPERA VOLADURA": "Operational delays caused by waiting for blasting operations to conclude.",
+    "DONP-TRASLADO/REMOLQUE": "Unexpected downtime for equipment relocation or towing activities.",
+    "MC-SISTEMA DIRECCION Y FRENOS": "Corrective maintenance for steering and brake systems to restore safe operation.",
+    "DONP-OTROS": "Unforeseen downtimes that do not fit into predefined categories, requiring flexible responses.",
+    "MP-CAMBIO DE COMPONENTE": "Scheduled replacement of critical components to prevent equipment failure.",
+    "DONP-LIMPIEZA AREA/EQUIPO/PARTE": "Unscheduled cleaning of areas, equipment, or parts to ensure operational readiness.",
+    "DONP-ABASTECIMIENTO DE AGUA": "Unexpected downtime caused by the need to supply water to equipment or areas.",
+    "MP-OTROS": "Scheduled maintenance activities outside of predefined categories.",
+    "MC-SISTEMA LEVANTE": "Corrective maintenance on lifting systems to restore operational capabilities.",
+    "DONP-COMBUSTIBLE": "Unplanned downtime for refueling equipment during operations.",
+    "MC-AIRE ACONDICIONADO": "Corrective maintenance for air conditioning systems to ensure operator comfort.",
+    "MC-SISTEMA 24V/SISTEMAS ELECTRICOS": "Maintenance of electrical systems to address power supply or operational issues.",
+    "MC-TORRE": "Corrective maintenance on tower structures to maintain stability and functionality.",
+    "MC-BARRAS/ACEROS": "Maintenance focused on steel bars or structures to address wear and tear.",
+    "MP-SISTEMA CONTROL": "Scheduled maintenance of control systems to prevent operational disruptions.",
+    "MP-PM-XX00": "Specific preventive maintenance activities categorized under 'PM-XX00'.",
+    "MC-SIN PARTIDA": "Corrective actions for equipment that fails to start during operations.",
+    "DONP-CADENAS": "Unexpected issues with chains requiring immediate attention for repair or replacement.",
+    "MC-INSPECCION/CHEQUEO/MUESTREO/EVALUACION": "Inspection and evaluation activities to identify and address potential issues.",
+    "DCE-CLIMA": "Downtime caused by adverse weather conditions impacting operations.",
+    "DONP-SIN ENERGIA": "Unplanned downtime due to power outages or insufficient energy supply.",
+    "MC-SISTEMA PROPULSION": "Corrective maintenance on propulsion systems to restore movement and functionality.",
+    "DONP-INSPECCION/CHEQUEO/MUESTREO/EVALUACION": "Unexpected inspection activities to ensure operational safety and efficiency.",
+    "DONP-SEGURIDAD": "Unplanned downtime for addressing safety concerns or compliance requirements.",
+    "ODNP-ESPERA CARRETERA/CAMINO/PISO": "Delays caused by road, path, or surface conditions preventing smooth operations.",
+    "ODNP-ESPERA CARGUIO": "Operational delays while waiting for loading activities to complete.",
+    "MC-SISTEMA ESTRUCTURA PRINCIPAL": "Corrective maintenance on the main structure of equipment to address integrity issues.",
+    "MC-SISTEMA MOTOR": "Maintenance of motor systems to restore power and operational efficiency.",
+    "MC-FALLA OPERACIONAL": "Operational failures requiring corrective maintenance to resume normal functionality.",
+    "MC-SISTEMA COMUNICACION": "Maintenance of communication systems to address connectivity or operational issues.",
+    "MP-CAMBIO/REPARACION TOLVA": "Scheduled replacement or repair of hoppers to maintain material handling efficiency.",
+    "MP-RUEDAS/LLANTAS": "Scheduled replacement or maintenance of tires to ensure mobility.",
+    "MC-OTROS": "Corrective maintenance activities outside of predefined categories.",
+    "MC-CABLES": "Maintenance or replacement of cables due to wear or operational issues.",
+    "MC-SISTEMA GIRO": "Corrective maintenance of rotation systems to restore equipment functionality.",
+    "DONP-BOTADERO": "Unexpected delays related to dump sites or disposal operations.",
+    "DONP-CAMBIO DE SITIO/SIN SITIO": "Unplanned downtime due to changes in location or lack of an assigned site.",
+    "DCE-HUELGA": "Downtime caused by strikes or labor disruptions affecting operations.",
+    "DONP-FALLA OPERACIONAL": "Unexpected operational failures requiring immediate resolution.",
+    "DO-APOYO": "Planned downtime for supporting activities or auxiliary operations.",
+    "DONP-DESCANSO/FATIGA": "Unexpected rest periods due to operator fatigue, ensuring safety and efficiency.",
+    "MC-SISTEMA CONTROL": "Corrective maintenance for control systems to restore normal operations.",
+    "MP-SISTEMA ESTRUCTURA PRINCIPAL": "Scheduled maintenance of the main structure to ensure operational safety.",
+    "DONP-COLACION": "Unexpected downtime for unscheduled meal breaks.",
+    "MC-RUEDAS/LLANTAS": "Corrective maintenance for wheels or tires to restore mobility.",
+    "MC-SISTEMA CONTRA INCENDIO": "Maintenance of fire suppression systems to ensure safety compliance.",
+    "ODNP-ESPERA CH": "Operational delays caused by waiting for specific tasks to be completed.",
+    "MC-SISTEMA LUBRICACION": "Corrective maintenance of lubrication systems to ensure smooth operation.",
+    "MC-SISTEMA POTENCIA": "Maintenance of power systems to address energy supply or operational issues.",
+    "MP-SISTEMA DIRECCION Y FRENOS": "Scheduled maintenance of steering and braking systems to ensure safety.",
+    "MC-SISTEMA BALDE": "Corrective maintenance of bucket systems to restore material handling capacity.",
+    "MP-SISTEMA LUBRICACION": "Scheduled maintenance of lubrication systems to prevent wear and tear.",
+    "MP-CAMBIO DE MOTOR": "Scheduled replacement of motors to maintain operational efficiency.",
+    "MC-ORUGAS": "Corrective maintenance for tracks to restore equipment mobility.",
+    "MC-ELEMENTOS DE DESGASTE": "Maintenance or replacement of worn components to ensure reliability.",
+    "DO-VOLADURA": "Planned downtime for blasting operations to advance mining activities.",
+    "MC-CADENAS": "Corrective maintenance for chains to restore operational functionality.",
+    "MC-SISTEMA DE AIRE": "Corrective maintenance of air systems to ensure operational safety.",
+    "MC-TRASLADO/REMOLQUE": "Corrective actions for towing or relocating equipment.",
+    "MP-SISTEMA HIDRAULICO": "Scheduled maintenance of hydraulic systems to ensure proper functionality.",
+    "MC-ESPERA/FALTA PERSONAL": "Delays caused by insufficient personnel or waiting for operator availability.",
+    "MP-INSPECCION/CHEQUEO/MUESTREO/EVALUACION": "Scheduled inspection activities to identify potential maintenance needs.",
+    "MC-ALARMA": "Corrective actions triggered by alarm systems to address operational issues.",
+    "MC-CAMBIO DE COMPONENTE": "Replacement of components due to wear or unexpected failure."
 }
+
 #Ubicacion para cada imagen TEMPORAL
 image_paths = {
     "DO": {
-        "PERFOS": "Generated_Images/DO_PERFOS.png",
-        "CAEX": "Generated_Images/DO_CAEX.png",
-        "CARGUIO": "Generated_Images/DO_CARGUIO.png",
-        "EEAA": "Generated_Images/DO_EEAA.png",
+        "PERFOS": "Generated_Images/Images_Classes/DO_PERFOS.png",
+        "CAEX": "Generated_Images/Images_Classes/DO_CAEX.png",
+        "CARGUIO": "Generated_Images/Images_Classes/DO_CARGUIO.png",
+        "EEAA": "Generated_Images/Images_Classes/DO_EEAA.png",
     },
     "DONP": {
-        "PERFOS": "Generated_Images/DONP_PERFOS.png",
-        "CAEX": "Generated_Images/DONP_CAEX.png",
-        "CARGUIO": "Generated_Images/DONP_CARGUIO.png",
-        "EEAA": "Generated_Images/DONP_EEAA.png",
+        "PERFOS": "Generated_Images/Images_Classes/DONP_PERFOS.png",
+        "CAEX": "Generated_Images/Images_Classes/DONP_CAEX.png",
+        "CARGUIO": "Generated_Images/Images_Classes/DONP_CARGUIO.png",
+        "EEAA": "Generated_Images/Images_Classes/DONP_EEAA.png",
     },
     "MP": {
-        "PERFOS": "Generated_Images/MP_PERFOS.png",
-        "CAEX": "Generated_Images/MP_CAEX.png",
-        "CARGUIO": "Generated_Images/MP_CARGUIO.png",
-        "EEAA": "Generated_Images/MP_EEAA.png",
+        "PERFOS": "Generated_Images/Images_Classes/MP_PERFOS.png",
+        "CAEX": "Generated_Images/Images_Classes/MP_CAEX.png",
+        "CARGUIO": "Generated_Images/Images_Classes/MP_CARGUIO.png",
+        "EEAA": "Generated_Images/Images_Classes/MP_EEAA.png",
     },
     "MC": {
-        "PERFOS": "Generated_Images/MC_PERFOS.png",
-        "CAEX": "Generated_Images/MC_CAEX.png",
-        "CARGUIO": "Generated_Images/MC_CARGUIO.png",
-        "EEAA": "Generated_Images/MC_EEAA.png",
+        "PERFOS": "Generated_Images/Images_Classes/MC_PERFOS.png",
+        "CAEX": "Generated_Images/Images_Classes/MC_CAEX.png",
+        "CARGUIO": "Generated_Images/Images_Classes/MC_CARGUIO.png",
+        "EEAA": "Generated_Images/Images_Classes/MC_EEAA.png",
     },
     "DCE": {
-        "PERFOS": "Generated_Images/DCE_PERFOS.png",
-        "CAEX": "Generated_Images/DCE_CAEX.png",
-        "CARGUIO": "Generated_Images/DCE_CARGUIO.png",
-        "EEAA": "Generated_Images/DCE_EEAA.png",
+        "PERFOS": "Generated_Images/Images_Classes/DCE_PERFOS.png",
+        "CAEX": "Generated_Images/Images_Classes/DCE_CAEX.png",
+        "CARGUIO": "Generated_Images/Images_Classes/DCE_CARGUIO.png",
+        "EEAA": "Generated_Images/Images_Classes/DCE_EEAA.png",
     },
     "DAAR": {
-        "PERFOS": "Generated_Images/DAAR_PERFOS.png",
-        "CAEX": "Generated_Images/DAAR_CAEX.png",
-        "CARGUIO": "Generated_Images/DAAR_CARGUIO.png",
-        "EEAA": "Generated_Images/DAAR_EEAA.png",
+        "PERFOS": "Generated_Images/Images_Classes/DAAR_PERFOS.png",
+        "CAEX": "Generated_Images/Images_Classes/DAAR_CAEX.png",
+        "CARGUIO": "Generated_Images/Images_Classes/DAAR_CARGUIO.png",
+        "EEAA": "Generated_Images/Images_Classes/DAAR_EEAA.png",
     },
     "DAAB": {
-        "PERFOS": "Generated_Images/DAAB_PERFOS.png",
-        "CAEX": "Generated_Images/DAAB_CAEX.png",
-        "CARGUIO": "Generated_Images/DAAB_CARGUIO.png",
-        "EEAA": "Generated_Images/DAAB_EEAA.png",
+        "PERFOS": "Generated_Images/Images_Classes/DAAB_PERFOS.png",
+        "CAEX": "Generated_Images/Images_Classes/DAAB_CAEX.png",
+        "CARGUIO": "Generated_Images/Images_Classes/DAAB_CARGUIO.png",
+        "EEAA": "Generated_Images/Images_Classes/DAAB_EEAA.png",
     },
 }
 # Título principal
 st.markdown("<div class='title'>⛏️ Mining Event Classification</div>", unsafe_allow_html=True)
-st.markdown("<div class='description'>Find which class type is your event.</div>", unsafe_allow_html=True)
+st.markdown("<div class='description'>Description</div>", unsafe_allow_html=True)
+
+st.markdown("<div class='section-header'>Introduction</div>", unsafe_allow_html=True)
+
+st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image("./Generated_Images/Captura_modificada_final.png")
+
+# Segundo bloque de texto, pequeño contexto y foto
+st.markdown("<div class='section-title'>Context 2</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image("./Generated_Images/Captura de pantalla 2024-12-04 104512.PNG")
+
+# Tercer bloque de texto, pequeño contexto y foto
+st.markdown("<div class='section-title'>Context 3</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image("./Generated_Images/Captura de pantalla 2024-12-04 105708.PNG")
+
+# Línea divisoria con título
+st.markdown("<div class='section-header'>Mine and Equipment</div>", unsafe_allow_html=True)
 
 st.markdown('<div class="section-title">Select Mine</div>', unsafe_allow_html=True)
 st.markdown(
@@ -759,7 +890,7 @@ additional_comment = st.text_area(
     key="comment"
 )
 
-# Validación en tiempo real
+comment_is_valid = False  # Nueva variable para rastrear si el comentario es válido
 if "comment" in st.session_state:
     comment_text = st.session_state.comment.strip()
     if comment_text:
@@ -768,6 +899,7 @@ if "comment" in st.session_state:
                 "<p style='text-align: center; color: green; font-weight: bold;'>✔ Comment is valid.</p>",
                 unsafe_allow_html=True
             )
+            comment_is_valid = True  # Comentario válido
         else:
             st.markdown(
                 "<p style='text-align: center; color: red; font-weight: bold;'>✖ Invalid comment. Use mining-related terms.</p>",
@@ -781,11 +913,12 @@ if "comment" in st.session_state:
 
 st.markdown("<div class='section-header'>Output</div>", unsafe_allow_html=True)
 
-if st.button("Classify Event"):
+# Botón "Classify Event" solo habilitado si el comentario es válido
+if st.button("Classify Event") and comment_is_valid:
     # Usar un spinner para simular una transición
     with st.spinner("Classifying the event, please wait..."):
         import time
-        time.sleep(0.01)  # Simular un pequeño retraso para la transición (puedes ajustar el tiempo)
+        time.sleep(0.01)  # Simular un pequeño retraso para la transición
 
         # Validaciones de entrada
         if duration is None:
@@ -795,8 +928,8 @@ if st.button("Classify Event"):
         else:
             try:
                 params = dict(
-                    start_time=start_time.strftime("%H:%M:%S"), #TODO CHANGE FORMAT X2
-                    end_time=end_time.strftime("%H:%M:%S"),
+                    start_time=start_datetime.strftime("%Y-%m-%d %H:%M:%S"),  # Formato combinado
+                    end_time=end_datetime.strftime("%Y-%m-%d %H:%M:%S"),
                     equipment_class=equipment_class,
                     equipment=equipment_id,
                     equipment_type=equipment_type,
@@ -805,27 +938,31 @@ if st.button("Classify Event"):
                 )
                 api_url = 'https://coppermining-image-288823311772.europe-west1.run.app/predict'
                 response = requests.get(api_url, params=params)
-                st.write(response.url)
 
                 prediction = response.json()
-                main_class = prediction['prediction'].split('-')[0]
+                predicted_class = prediction['prediction']  # Clase completa, como 'DONP-COMBUSTIBLE'
+
+                # Buscar explicación directamente en la lista de clases
+                explanation = class_descriptions.get(predicted_class, "No explanation available.")
 
                 # Mostrar resultados
-                st.markdown(f"<div class='output'>Prediction: <b>{prediction['answer']}</b></div><br>", unsafe_allow_html=True)
-                explanation = class_descriptions.get(main_class, "No explanation available.")
+                st.markdown(f"<div class='output'>Prediction: <b>{predicted_class}</b></div><br>", unsafe_allow_html=True)
                 st.markdown(f"<div class='output'><b>Explanation of the class event:</b> {explanation}</div><br>", unsafe_allow_html=True)
 
                 # Determinar la URL de la imagen correspondiente
-
-                image_url = image_paths.get(main_class, {}).get(equipment_class)
+                image_url = image_paths.get(predicted_class.split('-')[0], {}).get(equipment_class)
                 if image_url:
-                    st.image(image_url, caption=f"Visual representation of {prediction['prediction']} - {equipment_class}")
+                    st.image(image_url, caption=f"Visual representation of {predicted_class} - {equipment_class}")
                 else:
-                    st.warning(f"No image available for the combination: {prediction['prediction']} ({equipment_class}).")
+                    st.warning(f"No image available for the combination: {predicted_class} ({equipment_class}).")
 
             except Exception as e:
                 st.error(f"An error occurred while predicting: {e}")
-
+else:
+    st.markdown(
+        "<p style='text-align: center; color: gray; font-weight: bold;'></p>",
+        unsafe_allow_html=True
+    )
 
 #Prompt: An ultra-realistic photograph of a mining operation at {mine_name}, capturing a critical moment where a {vehicle_type} is expirencing a {problem_description}. Shot with photographic realism from eye-level POV, the scene conveys true scale and professional mining operations. The {vehicle_type} is prominently featured with clear visibility of affected components, showing authentic surface textures, accumulated dust, and operational wear patterns that reflect its daily use.
 #A primary technician wearing full mining safety gear including high-visibility yellow vest, white hard hat with site logo, and steel-toed boots, is methodically inspecting the {vehicle_type}. Their experienced stance and focused attention emphasize the professional nature of the operation. A supervisor stands fifteen feet away, holding a tablet displaying diagnostic data, actively monitoring the situation. A third worker, positioned at ground level near the vehicle, remains ready to assist with specialized tools while maintaining proper safety protocols.
