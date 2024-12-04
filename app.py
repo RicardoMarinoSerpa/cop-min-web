@@ -701,13 +701,14 @@ st.markdown("<div class='description'></div>", unsafe_allow_html=True)
 
 st.markdown("<div class='section-header'>Context</div>", unsafe_allow_html=True)
 
-st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Productivity is critical to copper mining industry</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    Mining is bigger than you might imagine. Every day, more than 50 thousands
+    tons of copper are being extracted by huge mining operations. Enhancing their
+    productivity means not only reducing operative costs but also reducing their
+    environmental impact.
     </div>
     """,
     unsafe_allow_html=True
@@ -715,13 +716,13 @@ st.markdown(
 
 st.image("./Presentation_Images/CopperMine.png")
 
-st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Our aim is to improve the industry as a whole</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    We are working with 25+ copper mines in Chile and Perú to help them identify
+    improvement opportunities. For this, we are creating a cross-operations benchmark
+    that will allow to compare the productivity of their equipment.
     </div>
     """,
     unsafe_allow_html=True
@@ -729,13 +730,13 @@ st.markdown(
 st.image("./Presentation_Images/MinesMap.png")
 
 # Tercer bloque de texto, pequeño contexto y foto
-st.markdown("<div class='section-title'>Context 2</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>This implies understanding a big variety of equipment</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
     Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    There are several equipment classes and types, and each mine may have many
+    similar machines.
     </div>
     """,
     unsafe_allow_html=True
@@ -743,26 +744,28 @@ st.markdown(
 st.image("./Presentation_Images/Equipment.png")
 
 # Segundo bloque de texto, pequeño contexto y foto
-st.markdown("<div class='section-title'>Context 3</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>We compare productivity using a standard time model</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    This model aims to classify the state of a machine, especially when it is not
+    operating. Was it a planned operative stop (e.g. shift change)? Was it preventive
+    or corrective maintenance? Was it because another machine was not operating?
+    Having one single model allows to compare across mines.
     </div>
     """,
     unsafe_allow_html=True
 )
 st.image("./Presentation_Images/TimeModel.png")
 
-st.markdown("<div class='section-title'>Context 4</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Neural networks and language processing allow an efficient and <br> effective classification</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    Our approach is to develop mixed models including Dense Neural Networks and
+    Large Language Models that can classify the state of any machine
+    at each moment of time. The models are trained with data
+    from previous years studies, which require extensive cleaning and preprocessing.
     </div>
     """,
     unsafe_allow_html=True
@@ -1002,63 +1005,58 @@ else:
 #
 st.markdown("<div class='section-header' style='margin-top: 100px;'>Performance and Limitations</div>", unsafe_allow_html=True)
 
-st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Performance</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    Our models achieve accuracies above 99%, meaning they can replace the
+    semi-manual classification work done by intermediate data analysis suppliers.
+    When we run highly specialized models that focus on one mine and encode their
+    dispatch softwares outputs, accuracies surpass 99,97%.
     </div>
     """,
     unsafe_allow_html=True
 )
 
-st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Limitations</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    Given the size and structure of the data, we face the trade-off having one general
+    model with lower accuracy - which allows for example to process new mines that may
+    participate in the future - and having multiple specialized models - which reduces
+    automation but yields better accuracy.
+    In general, the model is sensitive to the quality of the text input
+    (operator's comments) and might tend to classify unknown events as "other".
+    This makes sense but also means model retraining might be needed in the future.
     </div>
     """,
     unsafe_allow_html=True
 )
 
-st.markdown("<div class='section-header' style='margin-top: 100px;'>Next Steps</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-header' style='margin-top: 100px; margin-bottom: 40px;'>Next Steps</div>", unsafe_allow_html=True)
 
-st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
 st.markdown(
     """
-    <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    <style>
+        .numbered-paragraph {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .numbered-paragraph span {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <div class='numbered-paragraph'>
+        <span>1.</span> Incorporate all copper mines into the cleaning pipeline so that the model(s) can classify all of them.
     </div>
-    """,
-    unsafe_allow_html=True
-)
-
-st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
-st.markdown(
-    """
-    <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    <div class='numbered-paragraph'>
+        <span>2.</span> Develop an automated analysis pipeline that will highlight productivity opportunities per mine using as input the output of our first model.
     </div>
-    """,
-    unsafe_allow_html=True
-)
-
-st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
-st.markdown(
-    """
-    <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
+    <div class='numbered-paragraph'>
+        <span>3.</span> Build a time series model that will allow predicting equipment failures given their historical behavior (in progress).
     </div>
     """,
     unsafe_allow_html=True
