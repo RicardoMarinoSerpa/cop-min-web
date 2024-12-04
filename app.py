@@ -728,22 +728,8 @@ st.markdown(
 )
 st.image("./Presentation_Images/MinesMap.png")
 
-# Segundo bloque de texto, pequeño contexto y foto
-st.markdown("<div class='section-title'>Context 2</div>", unsafe_allow_html=True)
-st.markdown(
-    """
-    <div class='paragraph'>
-    Mining operations rely heavily on equipment performance and efficiency.
-    Understanding the context of event classification can help identify areas
-    for optimization and safety improvements.
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-st.image("./Presentation_Images/TimeModel.png")
-
 # Tercer bloque de texto, pequeño contexto y foto
-st.markdown("<div class='section-title'>Context 3</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Context 2</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
@@ -756,8 +742,37 @@ st.markdown(
 )
 st.image("./Presentation_Images/Equipment.png")
 
+# Segundo bloque de texto, pequeño contexto y foto
+st.markdown("<div class='section-title'>Context 3</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image("./Presentation_Images/TimeModel.png")
+
+st.markdown("<div class='section-title'>Context 4</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image("./Presentation_Images/TimeModel.png")
+
+
 # Línea divisoria con título
-st.markdown("<div class='section-header'>Mine and Equipment</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-header' style='margin-top: 100px;'>Mine and Equipments</div>", unsafe_allow_html=True)
+
 
 st.markdown('<div class="section-title">Select Mine</div>', unsafe_allow_html=True)
 st.markdown(
@@ -985,22 +1000,7 @@ else:
 #Natural daylight illuminates the scene, creating soft shadows that add depth without harsh contrasts. A slight mining dust hangs in the air, adding atmospheric perspective, while the sky above remains clear with minimal clouds. The overall atmosphere emphasizes safety, professionalism, and operational efficiency, maintaining photorealistic quality without artistic exaggeration. Every detail, from the workers' coordinated actions to the organized environment, reflects the systematic nature of modern mining operations.
 #
 #
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
-st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-header' style='margin-top: 100px;'>Performance and Limitations</div>", unsafe_allow_html=True)
 
 st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
 st.markdown(
@@ -1014,4 +1014,52 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-st.image("./Presentation_Images/CopperMine.png")
+st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown("<div class='section-header' style='margin-top: 100px;'>Next Steps</div>", unsafe_allow_html=True)
+
+st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
