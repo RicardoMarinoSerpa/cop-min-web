@@ -795,7 +795,7 @@ if st.button("Classify Event"):
         else:
             try:
                 params = dict(
-                    start_time=start_time.strftime("%H:%M:%S"),
+                    start_time=start_time.strftime("%H:%M:%S"), #TODO CHANGE FORMAT X2
                     end_time=end_time.strftime("%H:%M:%S"),
                     equipment_class=equipment_class,
                     equipment=equipment_id,
