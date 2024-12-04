@@ -579,6 +579,7 @@ equipment_descriptions = {
 }
 #Descripciones de las clases de eventos
 class_descriptions = {
+    "DO-OTROS": "Planned downtime for miscellaneous operational activities not covered by other categories, such as strategy planning, protocol reviews, or temporary adjustments to workflows.",
     "DONP-OPERADOR NO DISPONIBLE/ESPERA": "Unexpected downtime caused by unavailable or waiting operators, requiring reassignment or intervention.",
     "DO-COLACION": "Planned downtime for meal breaks, ensuring operator rest and productivity.",
     "DO-CAPACITACIONES-CHARLAS": "Scheduled training sessions or meetings aimed at improving skills and communication.",
@@ -696,9 +697,9 @@ image_paths = {
 }
 # Título principal
 st.markdown("<div class='title'>⛏️ Mining Event Classification</div>", unsafe_allow_html=True)
-st.markdown("<div class='description'>Description</div>", unsafe_allow_html=True)
+st.markdown("<div class='description'></div>", unsafe_allow_html=True)
 
-st.markdown("<div class='section-header'>Introduction</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-header'>Context</div>", unsafe_allow_html=True)
 
 st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
 st.markdown(
@@ -711,7 +712,21 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.image("./Generated_Images/Captura_modificada_final.png")
+
+st.image("./Presentation_Images/CopperMine.png")
+
+st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image("./Presentation_Images/MinesMap.png")
 
 # Segundo bloque de texto, pequeño contexto y foto
 st.markdown("<div class='section-title'>Context 2</div>", unsafe_allow_html=True)
@@ -725,7 +740,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.image("./Generated_Images/Captura de pantalla 2024-12-04 104512.PNG")
+st.image("./Presentation_Images/TimeModel.png")
 
 # Tercer bloque de texto, pequeño contexto y foto
 st.markdown("<div class='section-title'>Context 3</div>", unsafe_allow_html=True)
@@ -739,7 +754,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-st.image("./Generated_Images/Captura de pantalla 2024-12-04 105708.PNG")
+st.image("./Presentation_Images/Equipment.png")
 
 # Línea divisoria con título
 st.markdown("<div class='section-header'>Mine and Equipment</div>", unsafe_allow_html=True)
@@ -970,3 +985,33 @@ else:
 #Natural daylight illuminates the scene, creating soft shadows that add depth without harsh contrasts. A slight mining dust hangs in the air, adding atmospheric perspective, while the sky above remains clear with minimal clouds. The overall atmosphere emphasizes safety, professionalism, and operational efficiency, maintaining photorealistic quality without artistic exaggeration. Every detail, from the workers' coordinated actions to the organized environment, reflects the systematic nature of modern mining operations.
 #
 #
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'></div>", unsafe_allow_html=True)
+
+st.markdown("<div class='section-title'>Context</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Mining operations rely heavily on equipment performance and efficiency.
+    Understanding the context of event classification can help identify areas
+    for optimization and safety improvements.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
+st.image("./Presentation_Images/CopperMine.png")
