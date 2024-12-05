@@ -1,6 +1,8 @@
 import streamlit as st
 from datetime import datetime, date
 import requests
+from streamlit_folium import st_folium
+import folium
 
 # Configuración de la página
 st.set_page_config(
@@ -20,14 +22,14 @@ st.markdown(
     .title {
         text-align: center;
         font-size: 36px;
-        color: #76ff03;
+        color: #DAA520;
         font-weight: bold;
         margin-bottom: 10px;
     }
     .description {
         text-align: center;
         font-size: 18px;
-        color: #bdbdbd;
+        color: #DAA520;
         margin-bottom: 20px;
     }
     .section-title {
@@ -43,8 +45,8 @@ st.markdown(
     }
     .section-header {
         font-size: 24px;
-        color: #76ff03;
-        border-bottom: 2px solid #76ff03;
+        color: #DAA520;
+        border-bottom: 2px solid #DAA520;
         padding-bottom: 5px;
         margin-bottom: 15px;
     }
@@ -165,7 +167,7 @@ allowed_words = [
     'AHT APPLICATION CLOSED', 'Abastecimiento de agua', 'Evento operacional correctivo', 'Colacion', 'Espera traslado  ',
     "AHT'S LOADING AREA CLOSED", 'Espera energia ', 'ACTUALIZACIÓN BD', "AHT'S LOCATION CLOSED", 'Excluido Programado',
     'Espera de agua', 'LOADER IS IDLE', 'Falta de material', 'MOVIMIENTO DE CABLE', 'Evento operacional programado',
-    'Botadero no disponible', 'FALTA CAEX', 'PREVENTIVO TRIPULADO', 'CORRECTIVO TRIPULADO'
+    'Botadero no disponible', 'FALTA CAEX', 'PREVENTIVO TRIPULADO', 'CORRECTIVO TRIPULADO','SISTEMA PROPULSION','SISTEMA MOTOR',
 ]
 
 allowed_words = [word.lower() for phrase in allowed_words for word in phrase.split()]
@@ -716,6 +718,19 @@ st.markdown(
 
 st.image("./Presentation_Images/CopperMine.png")
 
+st.markdown("<div class='section-title'>Context 2</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    We are working with 25+ copper mines in Chile and Perú to help them identify
+    improvement opportunities. For this, we are creating a cross-operations benchmark
+    that will allow to compare the productivity of their equipment.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image("./Presentation_Images/MinesMap.png")
+
 st.markdown("<div class='section-title'>Our aim is to improve the industry as a whole</div>", unsafe_allow_html=True)
 st.markdown(
     """
@@ -776,6 +791,10 @@ st.image("./Presentation_Images/Model.png")
 # Línea divisoria con título
 st.markdown("<div class='section-header' style='margin-top: 100px;'>Mine and Equipments</div>", unsafe_allow_html=True)
 
+mine_locations = {
+    "Radomiro Tomic": {"coords": [-22.21666667, -68.9], "image": "Generated_Images/Radomiro-Tomic-.jpeg"},
+    "Gabriela Mistral": {"coords": [-23.406457117106, -68.820914608691], "image": "Generated_Images/1732572186JfmiH5e9.jpg"},
+}
 
 st.markdown('<div class="section-title">Select Mine</div>', unsafe_allow_html=True)
 st.markdown(
@@ -786,20 +805,63 @@ st.markdown(
 # Selección de mina
 mine = st.selectbox(
     "",
-    options=list(equipment_data.keys()),
+    options=list(mine_locations.keys()),
     key="mine_select"
 )
+if mine:
+    # Mostrar la imagen arriba
+    if "image" in mine_locations[mine]:
+        st.image(
+            mine_locations[mine]["image"],
+            use_container_width=True,
+            caption=f"Mining operation at {mine}"
+        )
+    else:
+        st.warning("No image available for the selected mine.")
 
-# Mostrar imagen asociada a la mina seleccionada
-if mine in mine_images:
-    st.image(
-        mine_images[mine],
-        use_container_width=True,
-        caption=f"Mining operation at {mine}"
+    # Mostrar el mapa abajo
+    location = mine_locations[mine]["coords"]
+    # Crear mapa con estilo híbrido (satélite + nombres y carreteras)
+    m = folium.Map(location=location, zoom_start=8, tiles=None)
+    folium.TileLayer(
+        tiles="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
+        attr="Google Hybrid",
+        name="Google Hybrid",
+        zoom_start=1,
+        overlay=False,
+        control=True,
+    ).add_to(m)
+
+    # Añadir círculo de 10 km
+    radius = 10000  # Radio en metros
+    diameter = radius * 2 / 1000  # Diámetro en kilómetros
+    folium.Circle(
+        location=location,
+        radius=radius,
+        color="red",
+        fill=True,
+        fill_opacity=0.2,
+    ).add_to(m)
+
+    # Mostrar el mapa en Streamlit
+    st_map = st_folium(m, width=800, height=400)
+
+    # Añadir pie de mapa con el diámetro
+    st.markdown(
+        f"""
+        <div style="
+            text-align: left;
+            margin-top: -100px;
+            font-size: 14px;
+            font-weight: bold;
+            color: white;
+            width: 800px;">
+            -Circle Diameter: {diameter} km
+        </div>
+        """,
+        unsafe_allow_html=True
     )
-else:
-    st.warning("No image available for the selected mine.")
-# Título y descripción de Equipment Class
+
 st.markdown('<div class="section-title">Equipment Class</div>', unsafe_allow_html=True)
 st.markdown(
     '<div class="section-description">Choose the broad category of equipment involved in the mining operation, such as trucks (CAEX), loaders (CARGUIO), or drilling rigs (PERFOS).</div>',
@@ -819,7 +881,7 @@ if equipment_class:
             '<div class="custom-warning">Equipment Type is not applicable for Gabriela Mistral.</div>',
             unsafe_allow_html=True
         )
-        equipment_type = None
+        equipment_type = ""
         equipment_id = st.selectbox(
             "Choose Equipment ID",
             options=[""] + equipment_data[mine][equipment_class].get("ids", []),
@@ -997,12 +1059,6 @@ else:
         unsafe_allow_html=True
     )
 
-#Prompt: An ultra-realistic photograph of a mining operation at {mine_name}, capturing a critical moment where a {vehicle_type} is expirencing a {problem_description}. Shot with photographic realism from eye-level POV, the scene conveys true scale and professional mining operations. The {vehicle_type} is prominently featured with clear visibility of affected components, showing authentic surface textures, accumulated dust, and operational wear patterns that reflect its daily use.
-#A primary technician wearing full mining safety gear including high-visibility yellow vest, white hard hat with site logo, and steel-toed boots, is methodically inspecting the {vehicle_type}. Their experienced stance and focused attention emphasize the professional nature of the operation. A supervisor stands fifteen feet away, holding a tablet displaying diagnostic data, actively monitoring the situation. A third worker, positioned at ground level near the vehicle, remains ready to assist with specialized tools while maintaining proper safety protocols.
-#The environment showcases a professional, active mining site with compact soil ground marked by clear tire impressions. Operational facilities and processing plants create a layered backdrop, with additional mining equipment visible in the middle distance. The maintenance area appears orderly and well-organized, reflecting standard safety practices.
-#Natural daylight illuminates the scene, creating soft shadows that add depth without harsh contrasts. A slight mining dust hangs in the air, adding atmospheric perspective, while the sky above remains clear with minimal clouds. The overall atmosphere emphasizes safety, professionalism, and operational efficiency, maintaining photorealistic quality without artistic exaggeration. Every detail, from the workers' coordinated actions to the organized environment, reflects the systematic nature of modern mining operations.
-#
-#
 st.markdown("<div class='section-header' style='margin-top: 100px;'>Performance and Limitations</div>", unsafe_allow_html=True)
 
 st.markdown("<div class='section-title'>Performance</div>", unsafe_allow_html=True)
@@ -1061,3 +1117,77 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+
+
+st.markdown("<div class='section-header' style='margin-top: 50px;'>Team Members</div>", unsafe_allow_html=True)
+
+# Crear dos filas con dos columnas cada una
+col1, col2 = st.columns(2)
+# Añadir estilos CSS personalizados para los captions
+st.markdown(
+    """
+    <style>
+    .caption {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 6px;
+        margin-bottom: 10px;
+        color: White;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# Primera fila
+with col1:
+    st.image("./Profile_Pictures/Kevin.jpeg", use_container_width=True)
+    st.markdown(
+        """
+        <div class="caption">Kevin Vallot</div>
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="https://link_to_member1.com" target="_blank">View Profile</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col2:
+    st.image("./Profile_Pictures/Ricardo.jpeg", use_container_width=True)
+    st.markdown(
+        """
+        <div class="caption">Ricardo Mariño</div>
+        <div style="text-align: center; margin-bottom: 30px;">
+            <a href="https://link_to_member2.com" target="_blank">View Profile</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+# Segunda fila
+col3, col4 = st.columns(2)
+
+with col3:
+    st.image("./Profile_Pictures/Sebastian.jpeg", use_container_width=True)
+    st.markdown(
+        """
+        <div class="caption">Sebastian Lundkvist</div>
+        <div style="text-align: center;">
+            <a href="https://link_to_member3.com" target="_blank">View Profile</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with col4:
+    st.image("./Profile_Pictures/Joan.jpeg", use_container_width=True)
+    st.markdown(
+        """
+        <div class="caption">Joan Cuevas</div>
+        <div style="text-align: center;">
+            <a href="https://link_to_member4.com" target="_blank">View Profile</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
