@@ -116,7 +116,7 @@ st.markdown(
 mine_images = {
     "Radomiro Tomic": "Generated_Images/Radomiro-Tomic-.jpeg",
     "Gabriela Mistral": "Generated_Images/1732572186JfmiH5e9.jpg",
-    "Ministro hales": "Generated_Images/9566874400_c0677e3b06_b.jpg"
+    "Ministro Hales": "Generated_Images/9566874400_c0677e3b06_b.jpg"
 }
 
 allowed_words = [
@@ -572,7 +572,7 @@ equipment_data = {
 
         }
     },
-    "Ministro hales": {
+    "Ministro Hales": {
         "CAEX": {
             "ids": ['CE01', 'CE02', 'CE03', 'CE04', 'CE05', 'CE06', 'CE07', 'CE10', 'CE11', 'CE12',
                     'CE13', 'CE14', 'CE15', 'CE16', 'CE17', 'CE18', 'CE19', 'CE20']
@@ -816,7 +816,7 @@ st.markdown("<div class='section-header' style='margin-top: 100px;'>Mine and Equ
 mine_locations = {
     "Radomiro Tomic": {"coords": [-22.21666667, -68.9], "image": "Generated_Images/Radomiro-Tomic-.jpeg"},
     "Gabriela Mistral": {"coords": [-23.406457117106, -68.820914608691], "image": "Generated_Images/1732572186JfmiH5e9.jpg"},
-    "Ministro hales": {"coords": [-22.37299, -68.88843], "image": "Generated_Images/9566874400_c0677e3b06_b.jpg"}
+    "Ministro Hales": {"coords": [-22.37299, -68.88843], "image": "Generated_Images/9566874400_c0677e3b06_b.jpg"}
 }
 
 st.markdown('<div class="section-title">Select Mine</div>', unsafe_allow_html=True)
@@ -842,7 +842,7 @@ if mine:
     else:
         st.warning("No image available for the selected mine.")
 
-    # Mostrar el mapa abajo
+    st.markdown("<div class='section-title'>Mine Ubication:</div>", unsafe_allow_html=True)
     location = mine_locations[mine]["coords"]
     # Crear mapa con estilo híbrido (satélite + nombres y carreteras)
     m = folium.Map(location=location, zoom_start=8, tiles=None)
@@ -854,7 +854,7 @@ if mine:
         control=True,
     ).add_to(m)
 
-    # Añadir círculo de 10 km
+
     radius = 10000  # Radio en metros
     diameter = radius * 2 / 1000  # Diámetro en kilómetros
     folium.Circle(
@@ -873,7 +873,7 @@ if mine:
         f"""
         <div style="
             text-align: left;
-            margin-top: -100px;
+            margin-top: -30px;
             font-size: 14px;
             font-weight: bold;
             color: white;
@@ -898,7 +898,7 @@ equipment_class = st.selectbox(
 
 # Opciones dinámicas basadas en Equipment Class
 if equipment_class:
-    if mine in ["Gabriela Mistral", "Ministro hales"]:
+    if mine in ["Gabriela Mistral", "Ministro Hales"]:
         st.markdown(
             f'<div class="custom-warning">Equipment Type is not applicable for {mine}.</div>',
             unsafe_allow_html=True
