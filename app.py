@@ -736,7 +736,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
 st.image("./Presentation_Images/CopperMine.png")
 
 st.markdown("<div class='section-title'>Productivity is the key metric to improve</div>", unsafe_allow_html=True)
@@ -777,8 +776,6 @@ st.markdown(
 )
 st.image("./Presentation_Images/TimeExample.png")
 
-
-# Tercer bloque de texto, pequeño contexto y foto
 st.markdown("<div class='section-title'>This implies understanding a big variety of equipment</div>", unsafe_allow_html=True)
 st.markdown(
     """
@@ -792,7 +789,6 @@ st.markdown(
 )
 st.image("./Presentation_Images/Equipment.png")
 
-# Segundo bloque de texto, pequeño contexto y foto
 st.markdown("<div class='section-title'>We compare productivity using a standard time model</div>", unsafe_allow_html=True)
 st.markdown(
     """
@@ -1066,7 +1062,7 @@ if st.button("Classify Event") and comment_is_valid:
                     mine_name=mine,
                     nlp_input=additional_comment
                 )
-                api_url = 'https://coppermining-image-288823311772.europe-west1.run.app/predict'
+                api_url = 'https://coppermining-image-demo-288823311772.europe-west1.run.app/predict'
                 response = requests.get(api_url, params=params)
 
                 prediction = response.json()
