@@ -116,6 +116,7 @@ st.markdown(
 mine_images = {
     "Radomiro Tomic": "Generated_Images/Radomiro-Tomic-.jpeg",
     "Gabriela Mistral": "Generated_Images/1732572186JfmiH5e9.jpg",
+    "Ministro hales": "Generated_Images/9566874400_c0677e3b06_b.jpg"
 }
 
 allowed_words = [
@@ -570,6 +571,27 @@ equipment_data = {
                     'R03', 'R04', 'R05', 'R06', 'R07', 'R08', 'R09', 'R10']
 
         }
+    },
+    "Ministro hales": {
+        "CAEX": {
+            "ids": ['CE01', 'CE02', 'CE03', 'CE04', 'CE05', 'CE06', 'CE07', 'CE10', 'CE11', 'CE12',
+                    'CE13', 'CE14', 'CE15', 'CE16', 'CE17', 'CE18', 'CE19', 'CE20']
+
+
+        },
+        "CARGUIO": {
+            "ids": ['PA_01', 'PA_02', 'PC_01', 'CF_01', 'CF_02', 'CF_DEMO']
+
+
+        },
+        "EEAA": {
+            "ids": ['CR_01', 'CR_02', 'CR_03', 'EXC01', 'MF_01', 'MF_02', 'MO_02', 'MO_03', 'MO_04',
+                    'TN_03', 'TN_04', 'TN_05', 'TO_01', 'TO_02', 'TO_03', 'TO_04', 'TO_05']
+        },
+        "PERFOS": {
+            "ids": ['PD02', 'PE01', 'PE02']
+
+        }
     }
 }
 #Descripciones de las clases de vehiculos
@@ -794,6 +816,7 @@ st.markdown("<div class='section-header' style='margin-top: 100px;'>Mine and Equ
 mine_locations = {
     "Radomiro Tomic": {"coords": [-22.21666667, -68.9], "image": "Generated_Images/Radomiro-Tomic-.jpeg"},
     "Gabriela Mistral": {"coords": [-23.406457117106, -68.820914608691], "image": "Generated_Images/1732572186JfmiH5e9.jpg"},
+    "Ministro hales": {"coords": [-22.37299, -68.88843], "image": "Generated_Images/9566874400_c0677e3b06_b.jpg"}
 }
 
 st.markdown('<div class="section-title">Select Mine</div>', unsafe_allow_html=True)
@@ -827,7 +850,6 @@ if mine:
         tiles="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
         attr="Google Hybrid",
         name="Google Hybrid",
-        zoom_start=1,
         overlay=False,
         control=True,
     ).add_to(m)
@@ -876,9 +898,9 @@ equipment_class = st.selectbox(
 
 # Opciones dinámicas basadas en Equipment Class
 if equipment_class:
-    if mine == "Gabriela Mistral":
+    if mine in ["Gabriela Mistral", "Ministro hales"]:
         st.markdown(
-            '<div class="custom-warning">Equipment Type is not applicable for Gabriela Mistral.</div>',
+            f'<div class="custom-warning">Equipment Type is not applicable for {mine}.</div>',
             unsafe_allow_html=True
         )
         equipment_type = ""
@@ -933,6 +955,7 @@ if equipment_class:
                 options=[""] + ids,
                 key="equipment_id_default_select"
             )
+
 
 # --- Sección: Event Duration ---
 st.markdown("<div class='section-header'>Event Duration</div>", unsafe_allow_html=True)
@@ -1117,76 +1140,81 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-
 st.markdown("<div class='section-header' style='margin-top: 50px;'>Team Members</div>", unsafe_allow_html=True)
 
-# Crear dos filas con dos columnas cada una
-col1, col2 = st.columns(2)
-# Añadir estilos CSS personalizados para los captions
+# Añadir estilos CSS personalizados para los captions y nombres
 st.markdown(
     """
     <style>
     .caption {
-        font-size: 18px;
+        font-size: 16px;
         font-weight: bold;
         text-align: center;
-        margin-top: 6px;
+        margin-top: 0px;
         margin-bottom: 10px;
         color: White;
+    }
+    .name {
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+        color: White;
+        margin-top: 0px;
+        margin-bottom: 5px;
     }
     </style>
     """,
     unsafe_allow_html=True
 )
 
-# Primera fila
-with col1:
-    st.image("./Profile_Pictures/Kevin.jpeg", use_container_width=True)
+cols = st.columns(4)
+
+
+with cols[0]:
+    st.image("./Profile_Pictures/Kevin.jpeg", width=150)
+    st.markdown("<div class='name'>Kevin Vallot</div>", unsafe_allow_html=True)
     st.markdown(
         """
-        <div class="caption">Kevin Vallot</div>
-        <div style="text-align: center; margin-bottom: 30px;">
-            <a href="https://link_to_member1.com" target="_blank">View Profile</a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-with col2:
-    st.image("./Profile_Pictures/Ricardo.jpeg", use_container_width=True)
-    st.markdown(
-        """
-        <div class="caption">Ricardo Mariño</div>
-        <div style="text-align: center; margin-bottom: 30px;">
-            <a href="https://link_to_member2.com" target="_blank">View Profile</a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-# Segunda fila
-col3, col4 = st.columns(2)
-
-with col3:
-    st.image("./Profile_Pictures/Sebastian.jpeg", use_container_width=True)
-    st.markdown(
-        """
-        <div class="caption">Sebastian Lundkvist</div>
         <div style="text-align: center;">
-            <a href="https://link_to_member3.com" target="_blank">View Profile</a>
+            <a href="www.linkedin.com/in/kevin-vallot-35266a3a" target="_blank">Linkedin Profile</a>
         </div>
         """,
         unsafe_allow_html=True
     )
 
-with col4:
-    st.image("./Profile_Pictures/Joan.jpeg", use_container_width=True)
+
+with cols[1]:
+    st.image("./Profile_Pictures/Ricardo.jpeg", width=150)
+    st.markdown("<div class='name'>Ricardo Mariño</div>", unsafe_allow_html=True)
     st.markdown(
         """
-        <div class="caption">Joan Cuevas</div>
         <div style="text-align: center;">
-            <a href="https://link_to_member4.com" target="_blank">View Profile</a>
+            <a href="https://www.linkedin.com/in/ricardo-mariño-364b1055/" target="_blank">Linkedin Profile</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+
+with cols[2]:
+    st.image("./Profile_Pictures/Sebastian.jpeg", width=150)
+    st.markdown("<div class='name'>Sebastian Lundkvist</div>", unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            <a href="https://www.linkedin.com/in/sebastian-lundkvist-pelaez-44187b26b" target="_blank">Linkedin Profile</a>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+with cols[3]:
+    st.image("./Profile_Pictures/Joan.jpeg", width=150)
+    st.markdown("<div class='name'>Joan Cuevas</div>", unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div style="text-align: center;">
+            <a href="https://www.linkedin.com/in/joan-cuevas-b308952a9/" target="_blank">Linkedin Profile</a>
         </div>
         """,
         unsafe_allow_html=True
