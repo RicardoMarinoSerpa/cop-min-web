@@ -827,7 +827,6 @@ if mine:
         tiles="https://mt1.google.com/vt/lyrs=y&x={x}&y={y}&z={z}",
         attr="Google Hybrid",
         name="Google Hybrid",
-        zoom_start=1,
         overlay=False,
         control=True,
     ).add_to(m)
@@ -851,7 +850,7 @@ if mine:
         f"""
         <div style="
             text-align: left;
-            margin-top: -100px;
+            margin-top: -30px;
             font-size: 14px;
             font-weight: bold;
             color: white;
