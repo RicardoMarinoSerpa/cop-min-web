@@ -725,14 +725,13 @@ st.markdown("<div class='description'></div>", unsafe_allow_html=True)
 
 st.markdown("<div class='section-header'>Context</div>", unsafe_allow_html=True)
 
-st.markdown("<div class='section-title'>Productivity is critical to copper mining industry</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Mining is bigger than you might imagine</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
-    Mining is bigger than you might imagine. Every day, more than 50 thousands
-    tons of copper are being extracted by huge mining operations. Enhancing their
-    productivity means not only reducing operative costs but also reducing their
-    environmental impact.
+    Every day, more than 50 thousands tons of copper are being extracted by
+    huge mining operations. Doing this in a efficient way not only reduces
+    operative costs but also limits the environmental impact.
     </div>
     """,
     unsafe_allow_html=True
@@ -740,18 +739,17 @@ st.markdown(
 
 st.image("./Presentation_Images/CopperMine.png")
 
-st.markdown("<div class='section-title'>Context 2</div>", unsafe_allow_html=True)
+st.markdown("<div class='section-title'>Productivity is the key metric to improve</div>", unsafe_allow_html=True)
 st.markdown(
     """
     <div class='paragraph'>
-    We are working with 25+ copper mines in Chile and Perú to help them identify
-    improvement opportunities. For this, we are creating a cross-operations benchmark
-    that will allow to compare the productivity of their equipment.
+    Productivity improvements are achieved by efficient use of resources
+    and yield to better results and more sustainable mining.
     </div>
     """,
     unsafe_allow_html=True
 )
-st.image("./Presentation_Images/MinesMap.png")
+st.image("./Presentation_Images/Productivity.png")
 
 st.markdown("<div class='section-title'>Our aim is to improve the industry as a whole</div>", unsafe_allow_html=True)
 st.markdown(
@@ -759,12 +757,26 @@ st.markdown(
     <div class='paragraph'>
     We are working with 25+ copper mines in Chile and Perú to help them identify
     improvement opportunities. For this, we are creating a cross-operations benchmark
-    that will allow to compare the productivity of their equipment.
+    that will allow to compare the
     </div>
     """,
     unsafe_allow_html=True
 )
 st.image("./Presentation_Images/MinesMap.png")
+
+st.markdown("<div class='section-title'>The key issue: being able to compare across mines</div>", unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class='paragraph'>
+    Different mining operations have different equipment and track their productivity
+    in different ways. In order to calculate real productivity and identify improvement
+    opportunities, it is key to standardize the language and the “state” of a machine.
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+st.image("./Presentation_Images/TimeExample.png")
+
 
 # Tercer bloque de texto, pequeño contexto y foto
 st.markdown("<div class='section-title'>This implies understanding a big variety of equipment</div>", unsafe_allow_html=True)
@@ -800,9 +812,9 @@ st.markdown(
     """
     <div class='paragraph'>
     Our approach is to develop mixed models including Dense Neural Networks and
-    Large Language Models that can classify the state of any machine
-    at each moment of time. The models are trained with data
-    from previous years studies, which require extensive cleaning and preprocessing.
+    Large Language Models that can classify the state of any machine at each moment
+    of time. The models are trained with data from previous years studies,
+    which require extensive cleaning and preprocessing.
     </div>
     """,
     unsafe_allow_html=True
