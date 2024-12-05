@@ -156,15 +156,15 @@ allowed_words = [
     'Reserva No Progamada', 'Demora', 'Reserva Programda', 'Operacional Programado',
     'Operacional No Programado', 'Mantenimiento No Programado', 'Mantenimiento Programado', 'Perdida Operacional',
     'Fuerza Mayor', 'Corte energia operacional', 'ABASTECIMIENTO COMBUSTIBLE', 'CAMBIO DE TURNO',
-    'Cambio de modulo', 'Traslado equipo a mantenimien', 'Relevo', 'Reunion', 'AHT DOWN TIME',
+    'Cambio de modulo', 'Traslado equipo a mantenimiento', 'Relevo', 'Reunion', 'AHT DOWN TIME',
     'AHT EXCEPTION', 'AHT HAS WRONG ASSIGNMENT', 'Sin Operador', 'Otras demoras', 'Sobrecarga o mal estibado',
-    'Neumaticos correctivo', 'Reparacion imprevista correct', 'Mantenimiento preventivo prog', "AHT'S BLOCKED BY AHT ERROR",
+    'Neumaticos correctivo', 'Reparacion imprevista correctiva', 'Mantenimiento preventivo prog', "AHT'S BLOCKED BY AHT ERROR",
     "AHT'S ROAD CLOSED", "AHT'S STOPPED", 'AHT IS WAITING FOR DUMP', 'AHT LOADER IS BUSY', 'Falta equipo de carguio',
     'NO PATH TO AREA FOR AHT', 'Limpieza de cancha', 'Obstruccion de vias', 'AHT BLOCKED BY A STOPPED AHT', 'TRONADURA',
     "AHT'S INTERSECTION CLOSED", 'Atollo', 'Espera Combustible', 'Reparacion programada', 'Chequeo preoperacional',
     'PREVENTIVO CAEX', 'Translado de equipo', 'CORRECTIVO CAEX', 'CORRECTIVO CENTRAL', 'Chancador no disponible',
     'Stock lleno', 'Neumaticos programados', 'Espera mecanico correctivo', 'CORRECTIVO RED', 'PREVENTIVO CENTRAL',
-    'UPGRADE', 'Excluido Operacional', "AHT'S DUMPING AREA CLOSED", 'Desviacion Programada program',
+    'UPGRADE', 'Excluido Operacional', "AHT'S DUMPING AREA CLOSED", 'Desviacion Programada',
     'AHT APPLICATION CLOSED', 'Abastecimiento de agua', 'Evento operacional correctivo', 'Colacion', 'Espera traslado  ',
     "AHT'S LOADING AREA CLOSED", 'Espera energia ', 'ACTUALIZACIÓN BD', "AHT'S LOCATION CLOSED", 'Excluido Programado',
     'Espera de agua', 'LOADER IS IDLE', 'Falta de material', 'MOVIMIENTO DE CABLE', 'Evento operacional programado',
@@ -718,6 +718,12 @@ image_paths = {
         "CARGUIO": "Generated_Images/Images_Classes/DAAB_CARGUIO.png",
         "EEAA": "Generated_Images/Images_Classes/DAAB_EEAA.png",
     },
+    "ODNP": {
+        "PERFOS": "Generated_Images/Images_Classes/ODNP_PERFOS.png",
+        "CAEX": "Generated_Images/Images_Classes/ODNP_CAEX.png",
+        "CARGUIO": "Generated_Images/Images_Classes/ODNP_CARGUIO.png",
+        "EEAA": "Generated_Images/Images_Classes/ODNP_EEAA.png",
+    },
 }
 # Título principal
 st.markdown("<div class='title'>⛏️ Mining Event Classification</div>", unsafe_allow_html=True)
@@ -873,10 +879,24 @@ if mine:
         fill_opacity=0.2,
     ).add_to(m)
 
-    # Mostrar el mapa en Streamlit
-    st_map = st_folium(m, width=800, height=400)
+    st.markdown(
+    """
+    <style>
+    .map-container {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding: 0;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
-    # Añadir pie de mapa con el diámetro
+    # Usa la clase CSS personalizada
+    st.markdown('<div class="map-container">', unsafe_allow_html=True)
+    st_map = st_folium(m, width=800, height=400)
+    st.markdown('</div>', unsafe_allow_html=True)
+
     st.markdown(
         f"""
         <div style="
@@ -978,7 +998,7 @@ with col1:
 with col2:
     st.markdown('<div class="time-input-container">', unsafe_allow_html=True)
     end_date = st.date_input("End Date", value=date.today())
-    end_time_input = st.text_input("End Time (HH:MM)", value="9:00", key="end_time")
+    end_time_input = st.text_input("End Time (HH:MM)", value="8:15", key="end_time")
     st.markdown('</div>', unsafe_allow_html=True)
 
 # Validación de formato de hora
