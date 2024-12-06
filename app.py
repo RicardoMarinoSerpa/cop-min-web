@@ -3,15 +3,26 @@ from datetime import datetime, date
 import requests
 from streamlit_folium import st_folium
 import folium
+from PIL import Image
 
-# Configuración de la página
+
 st.set_page_config(
     page_title="Mining Event Classification",
-    page_icon="⛏️",
+    page_icon="",  # Sin ícono
     layout="centered"
 )
-st.image("./Presentation_Images/frame.png")
 
+image1 = Image.open("./Presentation_Images/frame.png").resize((200, 200))
+image2 = Image.open("./Presentation_Images/image.png").resize((200, 200))
+
+# Crear columnas y mostrar las imágenes lado a lado
+col1, col2 = st.columns(2)
+
+with col1:
+    st.image(image1, use_container_width=True)
+
+with col2:
+    st.image(image2,  use_container_width=True)
 st.markdown(
     """
     <style>
@@ -725,7 +736,7 @@ image_paths = {
     },
 }
 # Título principal
-st.markdown("<div class='title'>⛏️ Mining Event Classification</div>", unsafe_allow_html=True)
+st.markdown("<div class='title'>  Mining Event Classification</div>", unsafe_allow_html=True)
 st.markdown("<div class='description'></div>", unsafe_allow_html=True)
 
 st.markdown("<div class='section-header'>Context</div>", unsafe_allow_html=True)
@@ -824,7 +835,7 @@ st.image("./Presentation_Images/Model.png")
 
 
 # Línea divisoria con título
-st.markdown("<div class='section-header' style='margin-top: 100px;'>Mine and Equipments</div>", unsafe_allow_html=True)
+st.markdown("<div class='title' style='margin-top: 50px;'>Visual Demo: Classification of one event</div>", unsafe_allow_html=True)
 
 mine_locations = {
     "Radomiro Tomic": {"coords": [-22.21666667, -68.9], "image": "Generated_Images/Radomiro-Tomic-.jpeg"},
