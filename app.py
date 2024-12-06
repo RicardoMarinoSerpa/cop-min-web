@@ -10,6 +10,7 @@ st.set_page_config(
     page_icon="⛏️",
     layout="centered"
 )
+st.image("./Presentation_Images/frame.png")
 
 st.markdown(
     """
@@ -1201,49 +1202,18 @@ cols = st.columns(4)
 with cols[0]:
     st.image("./Profile_Pictures/Kevin.jpeg", width=150)
     st.markdown("<div class='name'>Kevin Vallot</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div style="text-align: center;">
-            <a href="www.linkedin.com/in/kevin-vallot-35266a3a" target="_blank">Linkedin Profile</a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
 
 with cols[1]:
     st.image("./Profile_Pictures/Ricardo.jpeg", width=150)
     st.markdown("<div class='name'>Ricardo Mariño</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div style="text-align: center;">
-            <a href="https://www.linkedin.com/in/ricardo-mariño-364b1055/" target="_blank">Linkedin Profile</a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
 
 
 with cols[2]:
     st.image("./Profile_Pictures/Sebastian.jpeg", width=150)
     st.markdown("<div class='name'>Sebastian Lundkvist</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div style="text-align: center;">
-            <a href="https://www.linkedin.com/in/sebastian-lundkvist-pelaez-44187b26b" target="_blank">Linkedin Profile</a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
+
 
 with cols[3]:
     st.image("./Profile_Pictures/Joan.jpeg", width=150)
     st.markdown("<div class='name'>Joan Cuevas</div>", unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div style="text-align: center;">
-            <a href="https://www.linkedin.com/in/joan-cuevas-b308952a9/" target="_blank">Linkedin Profile</a>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
