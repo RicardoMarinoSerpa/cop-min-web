@@ -53,7 +53,6 @@ st.markdown(
     }
     .output {
         font-size: 18px;
-        color: #ffffff;
         font-weight: bold;
         text-align: center;
     }
@@ -88,7 +87,6 @@ st.markdown(
         font-size: 16px; /* Tamaño del texto del párrafo */
         line-height: 1.5; /* Altura de línea para mayor legibilidad */
         margin-bottom: 20px; /* Espacio inferior entre párrafos */
-        color: #e0e0e0; /* Color del texto */
     }
     .sub-title {
         font-size: 20px; /* Tamaño del subtítulo adicional */
