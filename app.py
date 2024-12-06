@@ -1167,6 +1167,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
+st.image("Presentation_Images/Time Series.png")
 st.markdown("<div class='section-header' style='margin-top: 50px;'>Team Members</div>", unsafe_allow_html=True)
 
 # Añadir estilos CSS personalizados para los captions y nombres
